@@ -231,10 +231,10 @@ def build_classifier(optimizer, dropout):
 classifier3 = KerasClassifier(build_fn=build_classifier)
 
 # Specify the different parameters we want to try in different combos.
-parameters = {'batch_size': [25, 32, 64],
-              'epochs': [100,500,1000],
-              'optimizer': ['adam', 'rmsprop'],
-              'dropout' : [0.1, 0.2, 0.3, 0.4]}
+parameters = {'batch_size': [25, 32, 64, 128, 256, 512],
+              'epochs': [100,200,300,400,500],
+              'optimizer': ['adam'],
+              'dropout' : [0.1, 0.2]}
 
 grid_search = GridSearchCV(estimator = classifier3,
                            param_grid = parameters,
