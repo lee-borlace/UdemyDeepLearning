@@ -22,6 +22,9 @@ from keras.layers import Dense
 classifier = Sequential()
 
 # Step 1 - Convolution
+
+# LB - 32 feature detectors - 3x3 each. 32 is a good place to start with. Input images are 64x64 with 3 channels (colour). Later we will make sure
+# the input images match this.
 classifier.add(Conv2D(32, (3, 3), input_shape = (64, 64, 3), activation = 'relu'))
 
 # Step 2 - Pooling
@@ -35,6 +38,7 @@ classifier.add(MaxPooling2D(pool_size = (2, 2)))
 classifier.add(Flatten())
 
 # Step 4 - Full connection
+#LB - good practice to choose a power of 2.
 classifier.add(Dense(units = 128, activation = 'relu'))
 classifier.add(Dense(units = 1, activation = 'sigmoid'))
 
@@ -45,6 +49,7 @@ classifier.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = [
 
 from keras.preprocessing.image import ImageDataGenerator
 
+# LB - here we are augmenting the training data by applying random scale, shear, zoom and horizontal flip.
 train_datagen = ImageDataGenerator(rescale = 1./255,
                                    shear_range = 0.2,
                                    zoom_range = 0.2,
@@ -67,3 +72,5 @@ classifier.fit_generator(training_set,
                          epochs = 25,
                          validation_data = test_set,
                          validation_steps = 2000)
+
+classifier.save(filepath = "output.txt")                         
