@@ -93,4 +93,6 @@ classifier.fit_generator(training_set,
 classifier.save(filepath = "cnn_improved_attempt_2.h5")
 
 classifier.model.metrics_names
-                        
+
+
+classifier.val
